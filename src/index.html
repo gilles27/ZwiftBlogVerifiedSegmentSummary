@@ -23,6 +23,8 @@
     <thead>
         <tr>
 			<th data-bind="click: sort('name')">Name</th>
+			<th data-bind="click: sort('length')">Length (mi)</th>
+			<th data-bind="click: sort('grade')">Avg. grade (%)</th>
 			<th data-bind="click: sort('time')">PR</th>
 			<th data-bind="click: sort('date')">Date</th>
 			<th data-bind="click: sort('bestTime')">KOM</th>
@@ -36,6 +38,8 @@
     <tbody data-bind="foreach: efforts">
         <tr>
             <td><a data-bind="attr: { href: url, title: name }, text: name"></a></td>
+			<td data-bind="text: length"></td>
+			<td data-bind="text: grade"></td>
             <td><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>
             <td data-bind="formattedDate: date"></td>
 			<td><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>

@@ -50,11 +50,13 @@ ko.bindingHandlers.formattedDate = {
     }
 };
 
-var SegmentViewModel = function (id, name) {
+var SegmentViewModel = function (id, name, length, grade) {
     var self = this;
 	
 	self.id = id;
 	self.name = name;
+	self.length = length;
+	self.grade = grade;
 	self.time = ko.observable(null);
 	self.date = ko.observable(null);
 	self.effortId = ko.observable(null);
@@ -104,20 +106,20 @@ $(document).ready(function(){
 	var accessToken = getParameterByName("accessToken");
 	var athleteId = getParameterByName("athleteId");
 	var segments = [
-		new SegmentViewModel(12109030, 'Hilly KOM Forward'), // Red polka with mtns
-		new SegmentViewModel(12128029, 'Hilly KOM Reverse'), // Red polka with mtns
-		new SegmentViewModel(11596903, 'Epic KOM Forward'), // Blue polka with goat
-		new SegmentViewModel(11596925, 'Epic KOM Reverse'), // Blue polka with goat
-		new SegmentViewModel(12109305, 'Sprint Forward'), // Green
-		new SegmentViewModel(12109228, 'Sprint Reverse'), // Green
-		new SegmentViewModel(12128826, 'Libby Hill KOM'), // Red polka with mtns (no reverse)
-		new SegmentViewModel(12128917, '23rd St KOM'), // No jersey?
-		new SegmentViewModel(12128762, 'Monument Ave Sprint'), // Green jersey
-		new SegmentViewModel(12128880, 'Broad St Sprint'), // No jersey
-		new SegmentViewModel(12744502, 'Box Hill KOM'), // Red polka with mtns
-		new SegmentViewModel(12744396, 'Fox Hill KOM'), // Red polka with mtns
-		new SegmentViewModel(12749377, 'The Mall Sprint Forward'), // Green 
-		new SegmentViewModel(12749402, 'The Mall Sprint Reverse') // Green
+		new SegmentViewModel(12109030, 'Hilly KOM Forward', 0.5, 6), // Red polka with mtns
+		new SegmentViewModel(12128029, 'Hilly KOM Reverse', 1.5, 2), // Red polka with mtns
+		new SegmentViewModel(11596903, 'Epic KOM Forward', 5.8, 4), // Blue polka with goat
+		new SegmentViewModel(11596925, 'Epic KOM Reverse', 3.8, 6), // Blue polka with goat
+		new SegmentViewModel(12109305, 'Sprint Forward', 0.2, 0), // Green
+		new SegmentViewModel(12109228, 'Sprint Reverse', 0.1, 0), // Green
+		new SegmentViewModel(12128826, 'Libby Hill KOM', 0.3, 6), // Red polka with mtns (no reverse)
+		new SegmentViewModel(12128917, '23rd St KOM', 0.1, 10), // No jersey?
+		new SegmentViewModel(12128762, 'Monument Ave Sprint', 0.1, 0), // Green jersey
+		new SegmentViewModel(12128880, 'Broad St Sprint', 0.1, 0), // No jersey
+		new SegmentViewModel(12744502, 'Box Hill KOM', 1.8, 4), // Red polka with mtns
+		new SegmentViewModel(12744396, 'Fox Hill KOM', 1.9, 4), // Red polka with mtns
+		new SegmentViewModel(12749377, 'The Mall Sprint Forward', 0.1, -1), // Green 
+		new SegmentViewModel(12749402, 'The Mall Sprint Reverse', 0.1, 1) // Green
 	];
 	
 	// Orange
