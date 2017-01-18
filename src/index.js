@@ -111,28 +111,20 @@ $(document).ready(function(){
 	
 	var viewModel = { efforts: ko.observableArray(segments) };
 	
-	viewModel.sortByTime = function() {
-		viewModel.efforts.sort(function(left, right) {
-			if (left.time() == right.time())
-				return 0;
-			if (left.time() < right.time())
-				return -1;
-			else
-				return 1;
-		});
-	};
-	
-	viewModel.sortByDate = function() {
-		viewModel.efforts.sort(function(left, right) {
-			if (left.date() == right.date())
-				return 0;
-			if (left.date() < right.date())
-				return -1;
-			else
-				return 1;
-		});
-	};
-	
+	viewModel.sort = function (propertyName) {
+	    viewModel.efforts.sort(function (left, right) {
+	        var leftValue = ko.unwrap(left[propertyName]);
+	        var rightValue = ko.unwrap(right[propertyName]);
+
+	        if (leftValue == rightValue)
+	            return 0;
+	        if (leftValue < rightValue)
+	            return -1;
+	        else
+	            return 1;
+	    });
+	}
+
 	ko.applyBindings(viewModel);
 	
 	for (var i = 0; i < segments.length; i++) {
