@@ -109,6 +109,31 @@ var SegmentViewModel = function (id, name, length, grade, jersey) {
 	});
 }
 
+var SegmentsViewModel = function (segments) {
+    var self = this;
+
+    self.efforts = ko.observableArray(segments)
+    self.lastSort = '';
+
+    self.sort = function (propertyName) {
+        var modifier = self.lastSort == propertyName ? -1 : 1;
+
+        self.efforts.sort(function (left, right) {
+            var leftValue = ko.unwrap(left[propertyName]);
+            var rightValue = ko.unwrap(right[propertyName]);
+
+            if (leftValue == rightValue)
+                return 0;
+            if (leftValue < rightValue)
+                return -1 * modifier;
+            else
+                return 1 * modifier;
+        });
+
+        self.lastSort = self.lastSort == propertyName ? '' : propertyName;
+    }
+}
+
 $(document).ready(function(){
 	var accessToken = getParameterByName("accessToken");
 	var athleteId = getParameterByName("athleteId");
@@ -134,25 +159,7 @@ $(document).ready(function(){
 	// F London loop (bug with R)
 	// F UCI Richmond (not sure about R)
 	
-	var viewModel = { efforts: ko.observableArray(segments), lastSort: '' };
-	
-	viewModel.sort = function (propertyName) {
-	    var modifier = viewModel.lastSort == propertyName ? -1 : 1;
-
-	    viewModel.efforts.sort(function (left, right) {
-	        var leftValue = ko.unwrap(left[propertyName]);
-	        var rightValue = ko.unwrap(right[propertyName]);
-
-	        if (leftValue == rightValue)
-	            return 0;
-	        if (leftValue < rightValue)
-	            return -1 * modifier;
-	        else
-	            return 1 * modifier;
-	    });
-
-	    viewModel.lastSort = viewModel.lastSort == propertyName ? '' : propertyName;
-	}
+	var viewModel = new SegmentsViewModel(segments);
 
 	ko.applyBindings(viewModel);
 	
