@@ -1,0 +1,16 @@
+Change mouse pointer for column headers.
+Deal with null when sorting.
+
+Additional fields-
+Show jersey icon if available in-game
+length, avg grade? or leave that to Strava?
+Enter athlete ID to compare to? or would you need permissions?
+
+Footer links-
+ZwiftBlog verified page
+Route pages
+Map pages
+whats on zwift
+
+Score? can we determine a score overall, like GPLRank?
+
