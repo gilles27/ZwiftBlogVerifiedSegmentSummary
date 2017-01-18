@@ -58,12 +58,23 @@ var SegmentViewModel = function (id, name) {
 	self.time = ko.observable(null);
 	self.date = ko.observable(null);
 	self.effortId = ko.observable(null);
+	self.bestTime = ko.observable(null);
+	self.bestDate = ko.observable(null);
+	self.bestEffortId = ko.observable(null);
 	self.rank = ko.observable(null);
 	self.percentile = ko.observable(null);
 	self.thirtyDayBestTime = ko.observable(null);
 	self.thirtyDayBestDate = ko.observable(null);
-	self.bestTime = ko.observable(null);
-	self.bestDate = ko.observable(null);
+	self.thirtyDayBestEffortId = ko.observable(null);
+
+	self.getEffortUrl = function (effortId) {
+	    var id = ko.unwrap(effortId);
+
+	    if (id == null) {
+	        return null;
+	    }
+	    return 'https://www.strava.com/segment_efforts/' + id.toString();
+	};
 
 	self.formattedRank = ko.computed(function() {
 	    if (self.rank() == null) {
@@ -77,10 +88,15 @@ var SegmentViewModel = function (id, name) {
 	});
 
 	self.effortUrl = ko.computed(function () {
-	    if (self.effortId() == null) {
-	        return null;
-	    }
-	    return 'https://www.strava.com/segment_efforts/' + self.effortId().toString();
+	    return self.getEffortUrl(self.effortId());
+	});
+
+	self.bestEffortUrl = ko.computed(function () {
+	    return self.getEffortUrl(self.bestEffortId());
+	});
+
+	self.thirtyDayBestEffortUrl = ko.computed(function () {
+	    return self.getEffortUrl(self.thirtyDayBestEffortId());
 	});
 }
 
@@ -157,6 +173,7 @@ $(document).ready(function(){
 				}
 				segment.bestTime(overallBest.moving_time);
 				segment.bestDate(overallBest.start_date);
+				segment.bestEffortId(overallBest.effort_id);
 			}
 		});
 		
@@ -180,6 +197,7 @@ $(document).ready(function(){
 				if (data.length == 1) {
 					segment.thirtyDayBestTime(data[0].moving_time);
 					segment.thirtyDayBestDate(data[0].start_date);
+					segment.thirtyDayBestEffortId(data[0].id);
 				}
 			}
 		});

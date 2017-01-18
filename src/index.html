@@ -16,27 +16,27 @@
 <table class="table table-striped">
     <thead>
         <tr>
-			<th>Name</th>
+			<th data-bind="click: sort('name')">Name</th>
 			<th data-bind="click: sort('time')">PR</th>
 			<th data-bind="click: sort('date')">Date</th>
-			<th>KOM</th>
-			<th>KOM Date</th>
-			<th>Rank</th>
-			<th>Percentile</th>
-			<th>30-day PR</th>
-			<th>30-day Date</th>
+			<th data-bind="click: sort('bestTime')">KOM</th>
+			<th data-bind="click: sort('bestDate')">KOM Date</th>
+			<th data-bind="click: sort('rank')">Rank</th>
+			<th data-bind="click: sort('percentile')">Percentile</th>
+			<th data-bind="click: sort('thirtyDayBestTime')">30-day PR</th>
+			<th data-bind="click: sort('thirtyDayBestDate')">30-day Date</th>
 		</tr>
     </thead>
     <tbody data-bind="foreach: efforts">
         <tr>
             <td><a data-bind="attr: { href: url, title: name }, text: name"></a></td>
-            <td><a data-bind="attr: { href: effortUrl, title: name }, secondsAsTime: time"></a></td>
+            <td><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>
             <td data-bind="formattedDate: date"></td>
-			<td data-bind="secondsAsTime: bestTime"></td>
+			<td><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
             <td data-bind="formattedDate: bestDate"></td>
 			<td data-bind="text: formattedRank"></td>
 			<td data-bind="text: percentile"></td>
-			<td data-bind="secondsAsTime: thirtyDayBestTime"></td>
+			<td><a data-bind="attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
             <td data-bind="formattedDate: thirtyDayBestDate"></td>
         </tr>
     </tbody>
