@@ -109,9 +109,11 @@ $(document).ready(function(){
 	// F London loop (bug with R)
 	// F UCI Richmond (not sure about R)
 	
-	var viewModel = { efforts: ko.observableArray(segments) };
+	var viewModel = { efforts: ko.observableArray(segments), lastSort: '' };
 	
 	viewModel.sort = function (propertyName) {
+	    var modifier = viewModel.lastSort == propertyName ? -1 : 1;
+
 	    viewModel.efforts.sort(function (left, right) {
 	        var leftValue = ko.unwrap(left[propertyName]);
 	        var rightValue = ko.unwrap(right[propertyName]);
@@ -119,10 +121,12 @@ $(document).ready(function(){
 	        if (leftValue == rightValue)
 	            return 0;
 	        if (leftValue < rightValue)
-	            return -1;
+	            return -1 * modifier;
 	        else
-	            return 1;
+	            return 1 * modifier;
 	    });
+
+	    viewModel.lastSort = viewModel.lastSort == propertyName ? '' : propertyName;
 	}
 
 	ko.applyBindings(viewModel);
