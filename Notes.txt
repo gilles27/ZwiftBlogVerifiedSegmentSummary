@@ -1,8 +1,5 @@
 Deal with null when sorting.
 
-Additional fields-
-Show jersey icon if available in-game
-
 Footer links-
 ZwiftBlog verified page
 Route pages

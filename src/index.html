@@ -23,6 +23,7 @@
     <thead>
         <tr>
 			<th data-bind="click: sort('name')">Name</th>
+            <th>Jersey</th>
 			<th data-bind="click: sort('length')">Length (mi)</th>
 			<th data-bind="click: sort('grade')">Avg. grade (%)</th>
 			<th data-bind="click: sort('time')">PR</th>
@@ -38,6 +39,7 @@
     <tbody data-bind="foreach: efforts">
         <tr>
             <td><a data-bind="attr: { href: url, title: name }, text: name"></a></td>
+            <td data-bind="html: jerseyHtml"></td>
 			<td data-bind="text: length"></td>
 			<td data-bind="text: grade"></td>
             <td><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>

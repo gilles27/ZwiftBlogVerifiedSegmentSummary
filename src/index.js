@@ -79,6 +79,12 @@ var SegmentViewModel = function (id, name, length, grade, jersey) {
 	    return 'https://www.strava.com/segment_efforts/' + id.toString();
 	};
 
+	self.jerseyHtml = ko.computed(function () {
+	    if (self.jersey == null) { return null; }
+
+	    return '<img src="' + jersey + '.png" height="20" width="20" />';
+	});
+
 	self.formattedRank = ko.computed(function() {
 	    if (self.rank() == null) {
 	        return '';
