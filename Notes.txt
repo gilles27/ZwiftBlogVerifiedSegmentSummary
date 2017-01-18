@@ -1,4 +1,3 @@
-Change mouse pointer for column headers.
 Deal with null when sorting.
 
 Additional fields-
