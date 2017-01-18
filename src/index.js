@@ -156,7 +156,7 @@ $(document).ready(function(){
 					segment.time(athleteBest[0].moving_time);
 					segment.date(athleteBest[0].start_date);
 					segment.rank(athleteBest[0].rank);
-					segment.percentile(Math.round(athleteBest[0].rank / data.effort_count * 100.0)); // TODO Round up, i.e. 3.1 => 4.
+					segment.percentile(Math.ceil(athleteBest[0].rank / data.effort_count * 100.0)); // TODO Round up, i.e. 3.1 => 4.
 					segment.effortId(athleteBest[0].effort_id);
 				}
 				segment.bestTime(overallBest.moving_time);
@@ -164,8 +164,13 @@ $(document).ready(function(){
 			}
 		});
 		
+		var startDate = new Date();
+		var endDate = new Date();
+
+		startDate.setDate(startDate.getDate() - 30);
+
 		$.ajax({
-			url: 'https://www.strava.com/api/v3/segments/' + segments[i].id.toString() + '/all_efforts?athlete_id=' + athleteId + '&start_date_local=2016-12-18T00:00:00Z&end_date_local=2017-01-17T00:00:00Z&page=1&per_page=1', // TODO Make dates dynamic
+		    url: 'https://www.strava.com/api/v3/segments/' + segments[i].id.toString() + '/all_efforts?athlete_id=' + athleteId + '&start_date_local=' + startDate.toISOString() + '&end_date_local=' + endDate.toISOString() + '&page=1&per_page=1',
 			headers: {
 				'Authorization': 'Bearer ' + accessToken,
 				'Content-Type': 'application/json'
