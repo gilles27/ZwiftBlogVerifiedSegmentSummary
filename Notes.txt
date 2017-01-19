@@ -1,2 +1,19 @@
 Score? can we determine a score overall, like GPLRank?
 Enter athlete ID to compare to? or would you need permissions?
+
+Authorization
+=============
+
+Go to https://www.strava.com/oauth/authorize?client_id=15489&response_type=code&redirect_uri=http://localhost
+Authorize the app, you will be redirected to localhost which likely won't work. In any case, grab the value of the "code" query string parameter
+Using Fiddler, craft a POST to https://www.strava.com/oauth/token with the following query string values
+
+client_id=15489
+client_secret=bb5b58c47a3d39bd16ea98483b3d9fde4c034fbc
+code=<The code captured from the query string>
+
+Grab access_token from the response JSON
+
+Browse to index.html with a query string of ?athleteId=<Your Athlete ID>&accessToken=<The access token you just got>
+
+Hopefully after a few moments to fetch the data, the tables will be populated.
