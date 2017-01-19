@@ -28,8 +28,10 @@ ko.bindingHandlers.secondsAsTime = {
         }
 
         var date = new Date(null);
+        var offset = value >= 3600 ? 2 : 0;
+
         date.setSeconds(value);
-        $(element).text(date.toISOString().substr(14, 5));
+        $(element).text(date.toISOString().substr(14 - offset, 5 + offset));
     }
 };
 
@@ -134,6 +136,68 @@ var SegmentsViewModel = function (segments) {
     }
 }
 
+var EffortUpdater = function (accessToken, athleteId) {
+    var self = this;
+
+    self.update = function (segments) {
+        for (var i = 0; i < segments.length; i++) {
+            $.ajax({
+                url: 'https://www.strava.com/api/v3/segments/' + segments[i].id.toString() + '/leaderboard?page=1&per_page=1',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                },
+                method: 'GET',
+                dataType: 'json',
+                segmentId: segments[i].id,
+                success: function (data) {
+                    var segment = getSegment(segments, this.segmentId);
+                    var athleteBest = $.grep(data.entries, function (item, index) {
+                        return item.athlete_id == athleteId;
+                    });
+                    var overallBest = data.entries[0];
+
+                    if (athleteBest.length == 1) {
+                        segment.time(athleteBest[0].moving_time);
+                        segment.date(athleteBest[0].start_date);
+                        segment.rank(athleteBest[0].rank);
+                        segment.percentile(Math.ceil(athleteBest[0].rank / data.effort_count * 100.0));
+                        segment.effortId(athleteBest[0].effort_id);
+                    }
+                    segment.bestTime(overallBest.moving_time);
+                    segment.bestDate(overallBest.start_date);
+                    segment.bestEffortId(overallBest.effort_id);
+                }
+            });
+
+            var startDate = new Date();
+            var endDate = new Date();
+
+            startDate.setDate(startDate.getDate() - 30);
+
+            $.ajax({
+                url: 'https://www.strava.com/api/v3/segments/' + segments[i].id.toString() + '/all_efforts?athlete_id=' + athleteId + '&start_date_local=' + startDate.toISOString() + '&end_date_local=' + endDate.toISOString() + '&page=1&per_page=1',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                },
+                method: 'GET',
+                dataType: 'json',
+                segmentId: segments[i].id,
+                success: function (data) {
+                    var segment = getSegment(segments, this.segmentId);
+
+                    if (data.length == 1) {
+                        segment.thirtyDayBestTime(data[0].moving_time);
+                        segment.thirtyDayBestDate(data[0].start_date);
+                        segment.thirtyDayBestEffortId(data[0].id);
+                    }
+                }
+            });
+        }
+    };
+}
+
 $(document).ready(function(){
 	var accessToken = getParameterByName("accessToken");
 	var athleteId = getParameterByName("athleteId");
@@ -154,68 +218,37 @@ $(document).ready(function(){
 		new SegmentViewModel(12749402, 'The Mall Sprint Reverse', 0.1, 1, 'green-jersey')
 	];
 	
-	// Orange
-	// F and R hilly lap Watopia
-	// F London loop (bug with R)
-	// F UCI Richmond (not sure about R)
-	
-	var viewModel = new SegmentsViewModel(segments);
+	var routes = [
+        new SegmentViewModel(12118362, 'Hilly Forward', 5.6, 0, 'orange-jersey'),
+        new SegmentViewModel(12128037, 'Hilly Reverse', 5.6, 0, 'orange-jersey'),
+        new SegmentViewModel(12136784, 'Flat Forward', 6.3, 0),
+        new SegmentViewModel(12109117, 'Flat Reverse', 6.3, 0),
+        new SegmentViewModel(12118421, 'Figure 8 Forward', 18.4, 0),
+        new SegmentViewModel(12128016, 'Figure 8 Reverse', 18.4, 0),
+        new SegmentViewModel(12118550, 'Mountain Forward', 18.3, 0),
+        new SegmentViewModel(12118555, 'Mountain Reverse', 18.3, 0),
+        new SegmentViewModel(12118544, 'Mountain 8 Forward', 19.8, 0),
+        new SegmentViewModel(12118314, 'Mountain 8 Reverse', 19.8, 0),
+        new SegmentViewModel(12118762, 'Pretzel Forward', 44.8, 0),
+        new SegmentViewModel(12111783, 'Pretzel Reverse', 44.8, 0),
+        new SegmentViewModel(12128718, '2015 UCI Worlds', 10, 0, 'orange-jersey'),
+        new SegmentViewModel(11307826, 'Flat', 3.1, 0),
+        new SegmentViewModel(11308213, 'Hilly', 5.7, 0),
+        new SegmentViewModel(12749649, 'London Loop Forward', 9.2, 0, 'orange-jersey'),
+        new SegmentViewModel(12744360, 'London Loop Reverse', 9.2, 0, 'orange-jersey'),
+        new SegmentViewModel(12749761, 'Classique Forward', 3.3, 0),
+        new SegmentViewModel(12747814, 'London 8 Forward', 12.6, 0),
+        new SegmentViewModel(12749353, 'London 8 Reverse', 12.5, 0),
+        new SegmentViewModel(12759713, 'PRL Half', 42.8, 0),
+        new SegmentViewModel(12759760, 'PRL Full', 107.5, 0)
+	];
+
+	var segmentsViewModel = new SegmentsViewModel(segments);
+	var routesViewModel = new SegmentsViewModel(routes);
+	var viewModel = { segments: segmentsViewModel, routes: routesViewModel };
 
 	ko.applyBindings(viewModel);
 	
-	for (var i = 0; i < segments.length; i++) {
-		$.ajax({
-			url: 'https://www.strava.com/api/v3/segments/' + segments[i].id.toString() + '/leaderboard?page=1&per_page=1',
-			headers: {
-				'Authorization': 'Bearer ' + accessToken,
-				'Content-Type': 'application/json'
-			},
-			method: 'GET',
-			dataType: 'json',
-			segmentId: segments[i].id,
-			success: function(data){
-				var segment = getSegment(segments, this.segmentId);
-				var athleteBest = $.grep(data.entries, function(item, index) {
-					return item.athlete_id == athleteId;
-				});
-				var overallBest = data.entries[0];
-				
-				if (athleteBest.length == 1) {
-					segment.time(athleteBest[0].moving_time);
-					segment.date(athleteBest[0].start_date);
-					segment.rank(athleteBest[0].rank);
-					segment.percentile(Math.ceil(athleteBest[0].rank / data.effort_count * 100.0)); // TODO Round up, i.e. 3.1 => 4.
-					segment.effortId(athleteBest[0].effort_id);
-				}
-				segment.bestTime(overallBest.moving_time);
-				segment.bestDate(overallBest.start_date);
-				segment.bestEffortId(overallBest.effort_id);
-			}
-		});
-		
-		var startDate = new Date();
-		var endDate = new Date();
-
-		startDate.setDate(startDate.getDate() - 30);
-
-		$.ajax({
-		    url: 'https://www.strava.com/api/v3/segments/' + segments[i].id.toString() + '/all_efforts?athlete_id=' + athleteId + '&start_date_local=' + startDate.toISOString() + '&end_date_local=' + endDate.toISOString() + '&page=1&per_page=1',
-			headers: {
-				'Authorization': 'Bearer ' + accessToken,
-				'Content-Type': 'application/json'
-			},
-			method: 'GET',
-			dataType: 'json',
-			segmentId: segments[i].id,
-			success: function(data){
-				var segment = getSegment(segments, this.segmentId);
-				
-				if (data.length == 1) {
-					segment.thirtyDayBestTime(data[0].moving_time);
-					segment.thirtyDayBestDate(data[0].start_date);
-					segment.thirtyDayBestEffortId(data[0].id);
-				}
-			}
-		});
-	}
+	new EffortUpdater(accessToken, athleteId).update(segmentsViewModel.efforts());
+	new EffortUpdater(accessToken, athleteId).update(routesViewModel.efforts());
 });
