@@ -1,10 +1,2 @@
-Deal with null when sorting.
-
-Footer links-
-ZwiftBlog verified page
-Route pages
-Map pages
-whats on zwift
-
 Score? can we determine a score overall, like GPLRank?
 Enter athlete ID to compare to? or would you need permissions?
