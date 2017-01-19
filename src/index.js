@@ -114,6 +114,9 @@ var SegmentViewModel = function (id, name, length, grade, jersey) {
 var SegmentsViewModel = function (segments) {
     var self = this;
 
+    $.each(segments, function (index, value) {
+        value.originalIndex = index;
+    });
     self.efforts = ko.observableArray(segments)
     self.lastSort = '';
 
@@ -251,4 +254,7 @@ $(document).ready(function(){
 	
 	new EffortUpdater(accessToken, athleteId).update(segmentsViewModel.efforts());
 	new EffortUpdater(accessToken, athleteId).update(routesViewModel.efforts());
+
+	segmentsViewModel.sort('originalIndex');
+	routesViewModel.sort('originalIndex');
 });
