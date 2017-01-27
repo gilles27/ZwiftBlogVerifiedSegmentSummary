@@ -38,6 +38,7 @@
 			<th class="number" data-bind="click: sort('time')">PR</th>
 			<th class="date" data-bind="click: sort('date')">Date</th>
             <th class="number" data-bind="click: sort('rank')">Rank</th>
+            <th class="number" data-bind="click: sort('entries')">Riders</th>
 			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
 			<th class="number" data-bind="click: sort('bestTime')">KOM</th>
 			<th class="date" data-bind="click: sort('bestDate')">KOM date</th>
@@ -54,6 +55,7 @@
             <td class="number"><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>
             <td class="date" data-bind="formattedDate: date"></td>
 			<td class="number" data-bind="text: formattedRank"></td>
+			<td class="number" data-bind="text: formattedEntries"></td>
 			<td class="number" data-bind="text: percentile"></td>
 			<td class="number"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
             <td class="date" data-bind="formattedDate: bestDate"></td>
@@ -71,6 +73,7 @@
 			<th class="number" data-bind="click: sort('length')">Length (mi)</th>
 			<th class="number" data-bind="click: sort('time')">PR</th>
 			<th class="number" data-bind="click: sort('rank')">Rank</th>
+            <th class="number" data-bind="click: sort('entries')">Riders</th>
 			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
 			<th class="date" data-bind="click: sort('date')">Date</th>
 			<th class="number" data-bind="click: sort('bestTime')">KOM</th>
@@ -87,6 +90,7 @@
             <td class="number"><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>
             <td class="date" data-bind="formattedDate: date"></td>
 			<td class="number" data-bind="text: formattedRank"></td>
+			<td class="number" data-bind="text: formattedEntries"></td>
 			<td class="number" data-bind="text: percentile"></td>
 			<td class="number"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
             <td class="date" data-bind="formattedDate: bestDate"></td>

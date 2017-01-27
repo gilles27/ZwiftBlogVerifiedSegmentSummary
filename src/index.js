@@ -67,10 +67,17 @@ var SegmentViewModel = function (id, name, length, grade, jersey) {
 	self.bestDate = ko.observable(null);
 	self.bestEffortId = ko.observable(null);
 	self.rank = ko.observable(null);
-	self.percentile = ko.observable(null);
+	self.entries = ko.observable(null);
 	self.thirtyDayBestTime = ko.observable(null);
 	self.thirtyDayBestDate = ko.observable(null);
 	self.thirtyDayBestEffortId = ko.observable(null);
+
+	self.percentile = ko.computed(function () {
+	    if (self.rank() == null || self.entries() == null) {
+	        return null;
+	    }
+	    return Math.ceil(self.rank() / self.entries() * 100.0);
+	});
 
 	self.getEffortUrl = function (effortId) {
 	    var id = ko.unwrap(effortId);
@@ -92,6 +99,13 @@ var SegmentViewModel = function (id, name, length, grade, jersey) {
 	        return '';
 	    }
 	    return self.rank().toLocaleString();
+	});
+
+	self.formattedEntries = ko.computed(function () {
+	    if (self.entries() == null) {
+	        return '';
+	    }
+	    return self.entries().toLocaleString();
 	});
 
 	self.url = ko.computed(function () {
@@ -164,7 +178,7 @@ var EffortUpdater = function (accessToken, athleteId) {
                         segment.time(athleteBest[0].moving_time);
                         segment.date(athleteBest[0].start_date);
                         segment.rank(athleteBest[0].rank);
-                        segment.percentile(Math.ceil(athleteBest[0].rank / data.effort_count * 100.0));
+                        segment.entries(data.entry_count);
                         segment.effortId(athleteBest[0].effort_id);
                     }
                     segment.bestTime(overallBest.moving_time);
