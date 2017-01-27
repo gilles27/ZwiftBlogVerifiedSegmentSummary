@@ -42,8 +42,8 @@
 			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
 			<th class="number" data-bind="click: sort('bestTime'), visible: showKom">KOM</th>
 			<th class="date" data-bind="click: sort('bestDate'), visible: showKom">KOM date</th>
-			<th class="number" data-bind="click: sort('thirtyDayBestTime')">30-day PR</th>
-			<th class="date" data-bind="click: sort('thirtyDayBestDate')">30-day date</th>
+			<th class="number" data-bind="click: sort('thirtyDayBestTime'), visible: showThirtyDay">30-day PR</th>
+			<th class="date" data-bind="click: sort('thirtyDayBestDate'), visible: showThirtyDay">30-day date</th>
 		</tr>
     </thead>
     <tbody data-bind="foreach: efforts">
@@ -57,10 +57,10 @@
 			<td class="number" data-bind="text: formattedRank"></td>
 			<td class="number" data-bind="text: formattedEntries"></td>
 			<td class="number" data-bind="text: percentile"></td>
-			<td class="number" data-bind="visible: $parent.showKom()"><a data-bind="    attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
+			<td class="number" data-bind="visible: $parent.showKom()"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
             <td class="date" data-bind="formattedDate: bestDate, visible: $parent.showKom()"></td>
-			<td class="number"><a data-bind="attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
-            <td class="date" data-bind="formattedDate: thirtyDayBestDate"></td>
+			<td class="number" data-bind="visible: $parent.showThirtyDay"><a data-bind="attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
+            <td class="date" data-bind="formattedDate: thirtyDayBestDate, visible: $parent.showThirtyDay"></td>
         </tr>
     </tbody>
 </table>
@@ -78,8 +78,8 @@
 			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
 			<th class="number" data-bind="click: sort('bestTime'), visible: showKom">KOM</th>
 			<th class="date" data-bind="click: sort('bestDate'), visible: showKom">KOM date</th>
-			<th class="number" data-bind="click: sort('thirtyDayBestTime')">30-day PR</th>
-			<th class="date" data-bind="click: sort('thirtyDayBestDate')">30-day date</th>
+			<th class="number" data-bind="click: sort('thirtyDayBestTime'), visible: showThirtyDay">30-day PR</th>
+			<th class="date" data-bind="click: sort('thirtyDayBestDate'), visible: showThirtyDay">30-day date</th>
 		</tr>
     </thead>
     <tbody data-bind="foreach: efforts">
@@ -94,8 +94,8 @@
 			<td class="number" data-bind="text: percentile"></td>
 			<td class="number" data-bind="visible: $parent.showKom()"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
             <td class="date" data-bind="formattedDate: bestDate, visible: $parent.showKom()"></td>
-			<td class="number"><a data-bind="attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
-            <td class="date" data-bind="formattedDate: thirtyDayBestDate"></td>
+			<td class="number" data-bind="visible: $parent.showThirtyDay"><a data-bind="    attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
+            <td class="date" data-bind="formattedDate: thirtyDayBestDate, visible: $parent.showThirtyDay"></td>
         </tr>
     </tbody>
 </table>

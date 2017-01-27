@@ -134,6 +134,7 @@ var SegmentsViewModel = function (segments) {
     self.efforts = ko.observableArray(segments)
     self.lastSort = '';
     self.showKom = ko.observable(getParameterByName('showKom') == 'true');
+    self.showThirtyDay = ko.observable(getParameterByName('showThirtyDay') == 'true');
     self.sort = function (propertyName) {
         var modifier = self.lastSort == propertyName ? -1 : 1;
 
