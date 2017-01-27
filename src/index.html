@@ -40,8 +40,8 @@
             <th class="number" data-bind="click: sort('rank')">Rank</th>
             <th class="number" data-bind="click: sort('entries')">Riders</th>
 			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
-			<th class="number" data-bind="click: sort('bestTime')">KOM</th>
-			<th class="date" data-bind="click: sort('bestDate')">KOM date</th>
+			<th class="number" data-bind="click: sort('bestTime'), visible: showKom">KOM</th>
+			<th class="date" data-bind="click: sort('bestDate'), visible: showKom">KOM date</th>
 			<th class="number" data-bind="click: sort('thirtyDayBestTime')">30-day PR</th>
 			<th class="date" data-bind="click: sort('thirtyDayBestDate')">30-day date</th>
 		</tr>
@@ -57,8 +57,8 @@
 			<td class="number" data-bind="text: formattedRank"></td>
 			<td class="number" data-bind="text: formattedEntries"></td>
 			<td class="number" data-bind="text: percentile"></td>
-			<td class="number"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
-            <td class="date" data-bind="formattedDate: bestDate"></td>
+			<td class="number" data-bind="visible: $parent.showKom()"><a data-bind="    attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
+            <td class="date" data-bind="formattedDate: bestDate, visible: $parent.showKom()"></td>
 			<td class="number"><a data-bind="attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
             <td class="date" data-bind="formattedDate: thirtyDayBestDate"></td>
         </tr>
@@ -72,12 +72,12 @@
             <th class="icon" data-bind="click: sort('jersey')">Jersey</th>
 			<th class="number" data-bind="click: sort('length')">Length (mi)</th>
 			<th class="number" data-bind="click: sort('time')">PR</th>
-			<th class="number" data-bind="click: sort('rank')">Rank</th>
+			<th class="date" data-bind="click: sort('date')">Date</th>
+            <th class="number" data-bind="click: sort('rank')">Rank</th>
             <th class="number" data-bind="click: sort('entries')">Riders</th>
 			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
-			<th class="date" data-bind="click: sort('date')">Date</th>
-			<th class="number" data-bind="click: sort('bestTime')">KOM</th>
-			<th class="date" data-bind="click: sort('bestDate')">KOM date</th>
+			<th class="number" data-bind="click: sort('bestTime'), visible: showKom">KOM</th>
+			<th class="date" data-bind="click: sort('bestDate'), visible: showKom">KOM date</th>
 			<th class="number" data-bind="click: sort('thirtyDayBestTime')">30-day PR</th>
 			<th class="date" data-bind="click: sort('thirtyDayBestDate')">30-day date</th>
 		</tr>
@@ -92,8 +92,8 @@
 			<td class="number" data-bind="text: formattedRank"></td>
 			<td class="number" data-bind="text: formattedEntries"></td>
 			<td class="number" data-bind="text: percentile"></td>
-			<td class="number"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
-            <td class="date" data-bind="formattedDate: bestDate"></td>
+			<td class="number" data-bind="visible: $parent.showKom()"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
+            <td class="date" data-bind="formattedDate: bestDate, visible: $parent.showKom()"></td>
 			<td class="number"><a data-bind="attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
             <td class="date" data-bind="formattedDate: thirtyDayBestDate"></td>
         </tr>
