@@ -33,6 +33,7 @@
         <tr>
             <th class="text" data-bind="click: sort('name')">Name</th>
             <th class="icon" data-bind="click: sort('jersey')">Jersey</th>
+            <th class="text" data-bind="click: sort('world')">World</th>
 			<th class="number" data-bind="click: sort('length')">Length (mi)</th>
 			<th class="number" data-bind="click: sort('grade')">Avg. grade (%)</th>
 			<th class="number" data-bind="click: sort('time')">PR</th>
@@ -50,6 +51,7 @@
         <tr>
             <td class="text"><a data-bind="attr: { href: url, title: name }, text: name"></a></td>
             <td class="icon" data-bind="html: jerseyHtml"></td>
+            <td class="text" data-bind="text: world"></td>
 			<td class="number" data-bind="text: length.toFixed(1)"></td>
 			<td class="number" data-bind="text: grade"></td>
             <td class="number"><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>
@@ -70,6 +72,7 @@
         <tr>
 			<th class="text" data-bind="click: sort('name')">Name</th>
             <th class="icon" data-bind="click: sort('jersey')">Jersey</th>
+            <th class="text" data-bind="click: sort('world')">World</th>
 			<th class="number" data-bind="click: sort('length')">Length (mi)</th>
 			<th class="number" data-bind="click: sort('time')">PR</th>
 			<th class="date" data-bind="click: sort('date')">Date</th>
@@ -86,6 +89,7 @@
         <tr>
             <td class="text"><a data-bind="attr: { href: url, title: name }, text: name"></a></td>
             <td class="icon" data-bind="html: jerseyHtml"></td>
+            <td class="text" data-bind="text: world"></td>
 			<td class="number" data-bind="text: length.toFixed(1)"></td>
             <td class="number"><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>
             <td class="date" data-bind="formattedDate: date"></td>

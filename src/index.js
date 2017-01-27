@@ -52,11 +52,12 @@ ko.bindingHandlers.formattedDate = {
     }
 };
 
-var SegmentViewModel = function (id, name, length, grade, jersey) {
+var SegmentViewModel = function (id, name, world, length, grade, jersey) {
     var self = this;
 	
 	self.id = id;
 	self.name = name;
+	self.world = world;
 	self.length = length;
 	self.grade = grade;
 	self.jersey = jersey == null ? '' : jersey;
@@ -220,48 +221,48 @@ $(document).ready(function(){
 	var accessToken = getParameterByName("accessToken");
 	var athleteId = getParameterByName("athleteId");
 	var segments = [
-		new SegmentViewModel(12109030, 'Hilly KOM Forward', 0.5, 6, 'red-polka-dot-jersey'),
-		new SegmentViewModel(12128029, 'Hilly KOM Reverse', 1.5, 2, 'red-polka-dot-jersey'),
-		new SegmentViewModel(11596903, 'Epic KOM Forward', 5.8, 4, 'blue-polka-dot-jersey'),
-		new SegmentViewModel(11596925, 'Epic KOM Reverse', 3.8, 6, 'blue-polka-dot-jersey'),
-		new SegmentViewModel(12109305, 'Sprint Forward', 0.2, 0, 'green-jersey'),
-		new SegmentViewModel(12109228, 'Sprint Reverse', 0.1, 0, 'green-jersey'),
-		new SegmentViewModel(12128826, 'Libby Hill KOM', 0.3, 6, 'red-polka-dot-jersey'),
-		new SegmentViewModel(12128917, '23rd St KOM', 0.1, 10),
-		new SegmentViewModel(12128762, 'Monument Ave Sprint', 0.1, 0, 'green-jersey'),
-		new SegmentViewModel(12128880, 'Broad St Sprint', 0.1, 0),
-		new SegmentViewModel(12744502, 'Box Hill KOM', 1.8, 4, 'red-polka-dot-jersey'),
-		new SegmentViewModel(12744396, 'Fox Hill KOM', 1.9, 4, 'red-polka-dot-jersey'),
-		new SegmentViewModel(12749377, 'The Mall Sprint Forward', 0.1, -1, 'green-jersey'),
-		new SegmentViewModel(12749402, 'The Mall Sprint Reverse', 0.1, 1, 'green-jersey')
+		new SegmentViewModel(12109030, 'Hilly KOM Forward', 'W', 0.5, 6, 'red-polka-dot-jersey'),
+		new SegmentViewModel(12128029, 'Hilly KOM Reverse', 'W', 1.5, 2, 'red-polka-dot-jersey'),
+		new SegmentViewModel(11596903, 'Epic KOM Forward', 'W', 5.8, 4, 'blue-polka-dot-jersey'),
+		new SegmentViewModel(11596925, 'Epic KOM Reverse', 'W', 3.8, 6, 'blue-polka-dot-jersey'),
+		new SegmentViewModel(12109305, 'Sprint Forward', 'W', 0.2, 0, 'green-jersey'),
+		new SegmentViewModel(12109228, 'Sprint Reverse', 'W', 0.1, 0, 'green-jersey'),
+		new SegmentViewModel(12128826, 'Libby Hill KOM', 'R', 0.3, 6, 'red-polka-dot-jersey'),
+		new SegmentViewModel(12128917, '23rd St KOM', 'R', 0.1, 10),
+		new SegmentViewModel(12128762, 'Monument Ave Sprint', 'R', 0.1, 0, 'green-jersey'),
+		new SegmentViewModel(12128880, 'Broad St Sprint', 'R', 0.1, 0),
+		new SegmentViewModel(12744502, 'Box Hill KOM', 'L', 1.8, 4, 'red-polka-dot-jersey'),
+		new SegmentViewModel(12744396, 'Fox Hill KOM', 'L', 1.9, 4, 'red-polka-dot-jersey'),
+		new SegmentViewModel(12749377, 'The Mall Sprint Forward', 'L', 0.1, -1, 'green-jersey'),
+		new SegmentViewModel(12749402, 'The Mall Sprint Reverse', 'L', 0.1, 1, 'green-jersey')
 	];
 	
 	var routes = [
-        new SegmentViewModel(12118362, 'Hilly Forward', 5.6, 0, 'orange-jersey'),
-        new SegmentViewModel(12128037, 'Hilly Reverse', 5.6, 0, 'orange-jersey'),
-        new SegmentViewModel(12136784, 'Flat Forward', 6.3, 0),
-        new SegmentViewModel(12109117, 'Flat Reverse', 6.3, 0),
-        new SegmentViewModel(12118421, 'Figure 8 Forward', 18.4, 0),
-        new SegmentViewModel(12128016, 'Figure 8 Reverse', 18.4, 0),
-        new SegmentViewModel(12118550, 'Mountain Forward', 18.3, 0),
-        new SegmentViewModel(12118555, 'Mountain Reverse', 18.3, 0),
-        new SegmentViewModel(12118544, 'Mountain 8 Forward', 19.8, 0),
-        new SegmentViewModel(12118314, 'Mountain 8 Reverse', 19.8, 0),
-        new SegmentViewModel(12118762, 'Pretzel Forward', 44.8, 0),
-        new SegmentViewModel(12111783, 'Pretzel Reverse', 44.8, 0),
-        new SegmentViewModel(14032406, 'Volcano Forward', 2.5, 0, 'orange-jersey'),
-        new SegmentViewModel(14032426, 'Volcano Reverse', 2.5, 0, 'orange-jersey'),
-        new SegmentViewModel(14032442, 'Volcano Flat Forward', 7.6, 0),
-        new SegmentViewModel(12128718, '2015 UCI Worlds', 10, 0, 'orange-jersey'),
-        new SegmentViewModel(11307826, 'Flat', 3.1, 0),
-        new SegmentViewModel(11308213, 'Hilly', 5.7, 0),
-        new SegmentViewModel(12749649, 'London Loop Forward', 9.2, 0, 'orange-jersey'),
-        new SegmentViewModel(12744360, 'London Loop Reverse', 9.2, 0, 'orange-jersey'),
-        new SegmentViewModel(12749761, 'Classique Forward', 3.3, 0),
-        new SegmentViewModel(12747814, 'London 8 Forward', 12.6, 0),
-        new SegmentViewModel(12749353, 'London 8 Reverse', 12.5, 0),
-        new SegmentViewModel(12759713, 'PRL Half', 42.8, 0),
-        new SegmentViewModel(12759760, 'PRL Full', 107.5, 0)
+        new SegmentViewModel(12118362, 'Hilly Forward', 'W', 5.6, 0, 'orange-jersey'),
+        new SegmentViewModel(12128037, 'Hilly Reverse', 'W', 5.6, 0, 'orange-jersey'),
+        new SegmentViewModel(12136784, 'Flat Forward', 'W', 6.3, 0),
+        new SegmentViewModel(12109117, 'Flat Reverse', 'W', 6.3, 0),
+        new SegmentViewModel(12118421, 'Figure 8 Forward', 'W', 18.4, 0),
+        new SegmentViewModel(12128016, 'Figure 8 Reverse', 'W', 18.4, 0),
+        new SegmentViewModel(12118550, 'Mountain Forward', 'W', 18.3, 0),
+        new SegmentViewModel(12118555, 'Mountain Reverse', 'W', 18.3, 0),
+        new SegmentViewModel(12118544, 'Mountain 8 Forward', 'W', 19.8, 0),
+        new SegmentViewModel(12118314, 'Mountain 8 Reverse', 'W', 19.8, 0),
+        new SegmentViewModel(12118762, 'Pretzel Forward', 'W', 44.8, 0),
+        new SegmentViewModel(12111783, 'Pretzel Reverse', 'W', 44.8, 0),
+        new SegmentViewModel(14032406, 'Volcano Forward', 'W', 2.5, 0, 'orange-jersey'),
+        new SegmentViewModel(14032426, 'Volcano Reverse', 'W', 2.5, 0, 'orange-jersey'),
+        new SegmentViewModel(14032442, 'Volcano Flat Forward', 'W', 7.6, 0),
+        new SegmentViewModel(12128718, '2015 UCI Worlds', 'R', 10, 0, 'orange-jersey'),
+        new SegmentViewModel(11307826, 'Flat', 'R', 3.1, 0),
+        new SegmentViewModel(11308213, 'Hilly', 'R', 5.7, 0),
+        new SegmentViewModel(12749649, 'London Loop Forward', 'L', 9.2, 0, 'orange-jersey'),
+        new SegmentViewModel(12744360, 'London Loop Reverse', 'L', 9.2, 0, 'orange-jersey'),
+        new SegmentViewModel(12749761, 'Classique Forward', 'L', 3.3, 0),
+        new SegmentViewModel(12747814, 'London 8 Forward', 'L', 12.6, 0),
+        new SegmentViewModel(12749353, 'London 8 Reverse', 'L', 12.5, 0),
+        new SegmentViewModel(12759713, 'PRL Half', 'L', 42.8, 0),
+        new SegmentViewModel(12759760, 'PRL Full', 'L', 107.5, 0)
 	];
 
 	var segmentsViewModel = new SegmentsViewModel(segments);
