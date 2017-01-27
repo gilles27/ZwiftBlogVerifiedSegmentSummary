@@ -37,10 +37,10 @@
 			<th class="number" data-bind="click: sort('grade')">Avg. grade (%)</th>
 			<th class="number" data-bind="click: sort('time')">PR</th>
 			<th class="date" data-bind="click: sort('date')">Date</th>
+            <th class="number" data-bind="click: sort('rank')">Rank</th>
+			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
 			<th class="number" data-bind="click: sort('bestTime')">KOM</th>
 			<th class="date" data-bind="click: sort('bestDate')">KOM date</th>
-			<th class="number" data-bind="click: sort('rank')">Rank</th>
-			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
 			<th class="number" data-bind="click: sort('thirtyDayBestTime')">30-day PR</th>
 			<th class="date" data-bind="click: sort('thirtyDayBestDate')">30-day date</th>
 		</tr>
@@ -53,10 +53,10 @@
 			<td class="number" data-bind="text: grade"></td>
             <td class="number"><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>
             <td class="date" data-bind="formattedDate: date"></td>
-			<td class="number"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
-            <td class="date" data-bind="formattedDate: bestDate"></td>
 			<td class="number" data-bind="text: formattedRank"></td>
 			<td class="number" data-bind="text: percentile"></td>
+			<td class="number"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
+            <td class="date" data-bind="formattedDate: bestDate"></td>
 			<td class="number"><a data-bind="attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
             <td class="date" data-bind="formattedDate: thirtyDayBestDate"></td>
         </tr>
@@ -70,11 +70,11 @@
             <th class="icon" data-bind="click: sort('jersey')">Jersey</th>
 			<th class="number" data-bind="click: sort('length')">Length (mi)</th>
 			<th class="number" data-bind="click: sort('time')">PR</th>
+			<th class="number" data-bind="click: sort('rank')">Rank</th>
+			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
 			<th class="date" data-bind="click: sort('date')">Date</th>
 			<th class="number" data-bind="click: sort('bestTime')">KOM</th>
 			<th class="date" data-bind="click: sort('bestDate')">KOM date</th>
-			<th class="number" data-bind="click: sort('rank')">Rank</th>
-			<th class="number" data-bind="click: sort('percentile')">Percentile</th>
 			<th class="number" data-bind="click: sort('thirtyDayBestTime')">30-day PR</th>
 			<th class="date" data-bind="click: sort('thirtyDayBestDate')">30-day date</th>
 		</tr>
@@ -86,10 +86,10 @@
 			<td class="number" data-bind="text: length.toFixed(1)"></td>
             <td class="number"><a data-bind="attr: { href: effortUrl }, secondsAsTime: time"></a></td>
             <td class="date" data-bind="formattedDate: date"></td>
-			<td class="number"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
-            <td class="date" data-bind="formattedDate: bestDate"></td>
 			<td class="number" data-bind="text: formattedRank"></td>
 			<td class="number" data-bind="text: percentile"></td>
+			<td class="number"><a data-bind="attr: { href: bestEffortUrl }, secondsAsTime: bestTime"></a></td>
+            <td class="date" data-bind="formattedDate: bestDate"></td>
 			<td class="number"><a data-bind="attr: { href: thirtyDayBestEffortUrl }, secondsAsTime: thirtyDayBestTime"></a></td>
             <td class="date" data-bind="formattedDate: thirtyDayBestDate"></td>
         </tr>
