@@ -59,7 +59,7 @@ var SegmentViewModel = function (id, name, length, grade, jersey) {
 	self.name = name;
 	self.length = length;
 	self.grade = grade;
-	self.jersey = jersey;
+	self.jersey = jersey == null ? '' : jersey;
 	self.time = ko.observable(null);
 	self.date = ko.observable(null);
 	self.effortId = ko.observable(null);
@@ -82,7 +82,7 @@ var SegmentViewModel = function (id, name, length, grade, jersey) {
 	};
 
 	self.jerseyHtml = ko.computed(function () {
-	    if (self.jersey == null) { return null; }
+	    if (self.jersey == null || self.jersey == "") { return null; }
 
 	    return '<img src="' + jersey + '.png" height="20" width="20" />';
 	});
